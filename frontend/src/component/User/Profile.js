@@ -16,6 +16,11 @@ const Profile = () => {
   const { myPokemons, error, loading } = useSelector(
     (state) => state.myPokemons
   );
+  const {
+    user,
+    error: userError,
+    isAuthenticated,
+  } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (error) {
@@ -23,7 +28,9 @@ const Profile = () => {
       dispatch(clearErrors());
     }
 
-    dispatch(myAllPokemons());
+    if (isAuthenticated) {
+      dispatch(myAllPokemons());
+    }
   }, [dispatch]);
 
   return (
