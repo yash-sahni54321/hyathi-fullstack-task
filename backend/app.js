@@ -14,9 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //Routes Import
 
-app.use("/api/v1", pokemon);
-app.use("/api/v1", user);
-decreaseHealthPokemon()
+app.use("https://hyathi-fullstack-task-allapi.vercel.app/api/v1", pokemon);
+app.use("https://hyathi-fullstack-task-allapi.vercel.app/api/v1", user);
+decreaseHealthPokemon();
 
 //Error Middleware
 app.use(errorMiddleware);
