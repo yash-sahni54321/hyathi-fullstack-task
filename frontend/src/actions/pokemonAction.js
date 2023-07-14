@@ -33,7 +33,9 @@ export const getPokemon = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_POKEMON_REQUEST });
 
-    const { data } = await axios.get("/api/v1/pokemons");
+    const { data } = await axios.get(
+      "https://hyathi-fullstack-task-allapi.vercel.app/api/v1/pokemons"
+    );
 
     dispatch({
       type: ALL_POKEMON_SUCCESS,
@@ -57,7 +59,7 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `/api/v1/admin/pokemon/new`,
+      `https://hyathi-fullstack-task-allapi.vercel.app/api/v1/admin/pokemon/new`,
       pokemonData,
       config
     );
@@ -79,7 +81,9 @@ export const deletePokemon = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_POKEMON_REQUEST });
 
-    const { data } = await axios.delete(`/api/v1/admin/pokemon/${id}`);
+    const { data } = await axios.delete(
+      `https://hyathi-fullstack-task-allapi.vercel.app/api/v1/admin/pokemon/${id}`
+    );
 
     dispatch({
       type: DELETE_POKEMON_SUCCESS,
@@ -98,7 +102,9 @@ export const getPokemonDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: POKEMON_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/pokemon/${id}`);
+    const { data } = await axios.get(
+      `https://hyathi-fullstack-task-allapi.vercel.app/api/v1/pokemon/${id}`
+    );
 
     dispatch({
       type: POKEMON_DETAILS_SUCCESS,
@@ -121,7 +127,10 @@ export const feedPokemon = (id) => async (dispatch) => {
       headers: { "Content-Type": "application/json" },
     };
 
-    const { data } = await axios.put(`/api/v1/pokemon/${id}`, config);
+    const { data } = await axios.put(
+      `https://hyathi-fullstack-task-allapi.vercel.app/api/v1/pokemon/${id}`,
+      config
+    );
     dispatch({
       type: POKEMON_DETAILS_SUCCESS,
       payload: data.pokemon,
@@ -138,7 +147,9 @@ export const myAllPokemons = () => async (dispatch) => {
   try {
     dispatch({ type: MY_POKEMON_REQUEST });
 
-    const { data } = await axios.get("/api/v1/me/pokemons");
+    const { data } = await axios.get(
+      "https://hyathi-fullstack-task-allapi.vercel.app/api/v1/me/pokemons"
+    );
     dispatch({ type: MY_POKEMON_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -158,7 +169,7 @@ export const adoptPokemon = (id, pokemon) => async (dispatch) => {
       },
     };
     const { data } = await axios.get(
-      `/api/v1/pokemon/adopt/${id}`,
+      `https://hyathi-fullstack-task-allapi.vercel.app/api/v1/pokemon/adopt/${id}`,
       pokemon,
       config
     );
@@ -185,7 +196,7 @@ export const removePokemon = (id) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `/api/v1/pokemon/remove/${id}`,
+      `https://hyathi-fullstack-task-allapi.vercel.app/api/v1/pokemon/remove/${id}`,
 
       config
     );
