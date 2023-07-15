@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Doughnut, Line } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useAlert } from "react-alert";
+import { useNavigate } from "react-router-dom";
 import {
   clearErrors,
   getPokemon,
@@ -14,6 +15,7 @@ import {
 const Dashboard = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const navigate = useNavigate();
   const { myPokemons, error, loading } = useSelector(
     (state) => state.myPokemons
   );
@@ -38,11 +40,14 @@ const Dashboard = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
+    dispatch(getPokemon());
     if (isAuthenticated) {
       dispatch(myAllPokemons());
-      dispatch(getPokemon());
     }
-  }, [error, dispatch]);
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [error, dispatch, isAuthenticated]);
 
   return (
     <Fragment>

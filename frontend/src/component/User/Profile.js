@@ -27,11 +27,13 @@ const Profile = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
-
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
     if (isAuthenticated) {
       dispatch(myAllPokemons());
     }
-  }, [dispatch]);
+  }, [dispatch, isAuthenticated]);
 
   return (
     <Fragment>

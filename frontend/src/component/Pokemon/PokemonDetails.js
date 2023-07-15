@@ -19,13 +19,13 @@ const PokemonDetails = () => {
   const { pokemon, error, loading } = useSelector(
     (state) => state.pokemonDetails
   );
-
+  const { loading: isAdoptedSuccess, Adopted } = useSelector(
+    (state) => state.adoptPokemon
+  );
   const { success } = useSelector((state) => state.removePokemon);
 
   const feedHandler = () => {
     dispatch(feedPokemon(params.id));
-    // alert.success("Feed with 10 Hp");
-    // window.location.reload(true);
   };
   const removePokemonHandler = () => {
     dispatch(removePokemon(params.id));
@@ -34,7 +34,6 @@ const PokemonDetails = () => {
   };
   const adoptHandler = () => {
     dispatch(adoptPokemon(params.id, pokemon));
-    alert.success("Pokemon Adopted Successfullyt");
   };
 
   useEffect(() => {
