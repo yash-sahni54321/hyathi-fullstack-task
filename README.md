@@ -17,8 +17,6 @@ The app will allow users to:
 
 ## Project Structure
 
-## project structure
-
 ```terminal
 backend
 frontend
