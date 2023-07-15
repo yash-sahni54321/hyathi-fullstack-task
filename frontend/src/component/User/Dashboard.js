@@ -36,11 +36,14 @@ const Dashboard = () => {
     ],
   };
   useEffect(() => {
+    dispatch(getPokemon());
+  }, []);
+
+  useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-    dispatch(getPokemon());
     if (isAuthenticated) {
       dispatch(myAllPokemons());
     }
