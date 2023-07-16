@@ -19,7 +19,10 @@ export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
 
-    const config = { headers: { "Content-Type": "application/json" } };
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
 
     const { data } = await axios.post(
       `https://adoptpokemon-backend.onrender.com/api/v1/login`,
@@ -37,10 +40,15 @@ export const login = (email, password) => async (dispatch) => {
 export const register = (userData) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
 
     const { data } = await axios.post(
       `https://adoptpokemon-backend.onrender.com/api/v1/register`,
-      userData
+      userData,
+      config
     );
 
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
@@ -58,7 +66,8 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: LOAD_USER_REQUEST });
 
     const { data } = await axios.get(
-      `https://adoptpokemon-backend.onrender.com/api/v1/me`
+      `https://adoptpokemon-backend.onrender.com/api/v1/me`,
+      { withCredentials: true }
     );
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });

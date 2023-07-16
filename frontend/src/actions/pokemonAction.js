@@ -34,7 +34,8 @@ export const getPokemon = () => async (dispatch) => {
     dispatch({ type: ALL_POKEMON_REQUEST });
 
     const { data } = await axios.get(
-      "https://adoptpokemon-backend.onrender.com/api/v1/pokemons"
+      "https://adoptpokemon-backend.onrender.com/api/v1/pokemons",
+      { withCredentials: true }
     );
 
     dispatch({
@@ -56,6 +57,7 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
 
     const config = {
       headers: { "Content-Type": "application/json" },
+      withCredentials: true,
     };
 
     const { data } = await axios.post(
@@ -103,7 +105,8 @@ export const getPokemonDetails = (id) => async (dispatch) => {
     dispatch({ type: POKEMON_DETAILS_REQUEST });
 
     const { data } = await axios.get(
-      `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/${id}`
+      `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/${id}`,
+      { withCredentials: true }
     );
 
     dispatch({
@@ -125,6 +128,7 @@ export const feedPokemon = (id) => async (dispatch) => {
 
     const config = {
       headers: { "Content-Type": "application/json" },
+      withCredentials: true,
     };
 
     const { data } = await axios.put(
@@ -148,7 +152,8 @@ export const myAllPokemons = () => async (dispatch) => {
     dispatch({ type: MY_POKEMON_REQUEST });
 
     const { data } = await axios.get(
-      "https://adoptpokemon-backend.onrender.com/api/v1/me/pokemons"
+      "https://adoptpokemon-backend.onrender.com/api/v1/me/pokemons",
+      { withCredentials: true }
     );
     dispatch({ type: MY_POKEMON_SUCCESS, payload: data });
   } catch (error) {
@@ -167,6 +172,7 @@ export const adoptPokemon = (id, pokemon) => async (dispatch) => {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     };
     const { data } = await axios.get(
       `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/adopt/${id}`,
@@ -194,6 +200,7 @@ export const removePokemon = (id) => async (dispatch) => {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     };
     const { data } = await axios.post(
       `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/remove/${id}`,
