@@ -22,7 +22,7 @@ export const login = (email, password) => async (dispatch) => {
     const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
-      `https://hyathi-fullstack-task-allapi.vercel.app/api/v1/login`,
+      `https://adoptpokemon-backend.onrender.com//api/v1/login`,
       { email, password },
       config
     );
@@ -39,7 +39,7 @@ export const register = (userData) => async (dispatch) => {
     dispatch({ type: REGISTER_USER_REQUEST });
 
     const { data } = await axios.post(
-      `https://hyathi-fullstack-task-allapi.vercel.app/api/v1/register`,
+      `https://adoptpokemon-backend.onrender.com//api/v1/register`,
       userData
     );
 
@@ -58,7 +58,7 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: LOAD_USER_REQUEST });
 
     const { data } = await axios.get(
-      `https://hyathi-fullstack-task-allapi.vercel.app/api/v1/me`
+      `https://adoptpokemon-backend.onrender.com//api/v1/me`
     );
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
@@ -70,9 +70,7 @@ export const loadUser = () => async (dispatch) => {
 // Logout User
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get(
-      `https://hyathi-fullstack-task-allapi.vercel.app/api/v1/logout`
-    );
+    await axios.get(`https://adoptpokemon-backend.onrender.com//api/v1/logout`);
 
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
