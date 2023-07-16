@@ -61,7 +61,7 @@ README.md
 
 - Delete Pokemon -- Admin
 
-![All Api](postmanApiCapture.PNG)
+![Postman](postmanApiCapture.PNG)
 
 ## Screen Shots of working project.
 
@@ -75,10 +75,10 @@ Profile Page
 
 Dasboard
 
-![Dashboard](DashBoard.PNG)
+![Dasboard](DashBoard.PNG)
 
 Product Detail
 
-![BeforeLogin](DetailBeforeLogin.PNG)
+![ProductDetails](DetailBeforeLogin.PNG)
 
-![AfterLogin](DetailPageAfterLogin.PNG)
+![ProductDetails](DetailPageAfterLogin.PNG)
