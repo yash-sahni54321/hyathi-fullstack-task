@@ -7,7 +7,20 @@ const pokemon = require("./routes/pokemonRoute");
 const user = require("./routes/userRoute");
 const { decreaseHealthPokemon } = require("./controllers/pokemonController");
 const app = express();
-app.use(cors({ origin: true, credentials: true }));
+const corsOptions = {
+  origin: `${process.env.FRONDEND_LINK}`,
+  credentials: true,
+  optionSuccessStatus: 200,
+  Headers: true,
+  exposedHeaders: "Set-Cookie",
+  methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
+  allowedHeaders: [
+    "Access-Control-Allow-Origin",
+    "Content-Type",
+    "Authorization",
+  ],
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
