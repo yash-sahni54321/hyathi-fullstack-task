@@ -34,7 +34,7 @@ export const getPokemon = () => async (dispatch) => {
     dispatch({ type: ALL_POKEMON_REQUEST });
 
     const { data } = await axios.get(
-      "https://adoptpokemon-backend.onrender.com//api/v1/pokemons"
+      "https://adoptpokemon-backend.onrender.com/api/v1/pokemons"
     );
 
     dispatch({
@@ -59,7 +59,7 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `https://adoptpokemon-backend.onrender.com//api/v1/admin/pokemon/new`,
+      `https://adoptpokemon-backend.onrender.com/api/v1/admin/pokemon/new`,
       pokemonData,
       config
     );
@@ -82,7 +82,7 @@ export const deletePokemon = (id) => async (dispatch) => {
     dispatch({ type: DELETE_POKEMON_REQUEST });
 
     const { data } = await axios.delete(
-      `https://adoptpokemon-backend.onrender.com//api/v1/admin/pokemon/${id}`
+      `https://adoptpokemon-backend.onrender.com/api/v1/admin/pokemon/${id}`
     );
 
     dispatch({
@@ -103,7 +103,7 @@ export const getPokemonDetails = (id) => async (dispatch) => {
     dispatch({ type: POKEMON_DETAILS_REQUEST });
 
     const { data } = await axios.get(
-      `https://adoptpokemon-backend.onrender.com//api/v1/pokemon/${id}`
+      `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/${id}`
     );
 
     dispatch({
@@ -128,7 +128,7 @@ export const feedPokemon = (id) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `https://adoptpokemon-backend.onrender.com//api/v1/pokemon/${id}`,
+      `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/${id}`,
       config
     );
     dispatch({
@@ -148,7 +148,7 @@ export const myAllPokemons = () => async (dispatch) => {
     dispatch({ type: MY_POKEMON_REQUEST });
 
     const { data } = await axios.get(
-      "https://adoptpokemon-backend.onrender.com//api/v1/me/pokemons"
+      "https://adoptpokemon-backend.onrender.com/api/v1/me/pokemons"
     );
     dispatch({ type: MY_POKEMON_SUCCESS, payload: data });
   } catch (error) {
@@ -169,7 +169,7 @@ export const adoptPokemon = (id, pokemon) => async (dispatch) => {
       },
     };
     const { data } = await axios.get(
-      `https://adoptpokemon-backend.onrender.com//api/v1/pokemon/adopt/${id}`,
+      `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/adopt/${id}`,
       pokemon,
       config
     );
@@ -196,7 +196,7 @@ export const removePokemon = (id) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `https://adoptpokemon-backend.onrender.com//api/v1/pokemon/remove/${id}`,
+      `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/remove/${id}`,
 
       config
     );
