@@ -23,16 +23,15 @@ To run the project locally, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/yash-sahni54321/hyathi-fullstack-task.git`
 2. Navigate to the project directory: `cd hyathi-fullstack-task`
-3. Install the dependencies for the server: `npm install`
-4. Navigate to the client directory: `cd client`
-5. Install the dependencies for the client: `npm install`
-6. Return to the main project directory: `cd ..`
-7. Start the development server: `npm run dev`
+3. Install the dependencies for the server: `cd backend`
+4. Navigate to the client directory: `cd frontend`
+5. Install the dependencies for the client and server: `npm install`
+6. Start the client : `npm start`
+7. Start the development server: `npx nodemon server.js`
 
 ## Usage
 
-Once the server and client are running, open your web browser and navigate to `http://localhost:3000` to access the Adopt Pokemons website.
-
+Once the server and client are running, open your web browser and navigate to `http://localhost:3000` to access the Adopt Pokemons website. 
 ## API Endpoints
 
 The following API endpoints are available in the project:
