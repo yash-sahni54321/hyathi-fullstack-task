@@ -32,25 +32,28 @@ To run the project locally, follow these steps:
 ## Usage
 
 Once the server and client are running, open your web browser and navigate to `http://localhost:3000` to access the Adopt Pokemons website. 
+Backend : (https://adoptpokemon-backend.onrender.com/)
 ## API Endpoints
 
 The following API endpoints are available in the project:
 
-1. `GET /api/pokemons`: Get a list of all available Pokemons.
-2. `GET /api/pokemons/:id`: Get details of a specific Pokemon by ID.
-3. `POST /api/pokemons`: Create a new Pokemon for adoption.
-4. `PUT /api/pokemons/:id`: Update information of a specific Pokemon by ID.
-5. `DELETE /api/pokemons/:id`: Delete a Pokemon by ID.
+1. `GET [/api/v1/pokemons](https://adoptpokemon-backend.onrender.com/api/v1/pokemons)`: Get a list of all available Pokemons.
+2. `GET [/api/v1/pokemons/:id](https://adoptpokemon-backend.onrender.com/api/v1/pokemon/64a70b4d7db1f36b174e4b79)`: Get details of a specific Pokemon by ID.
+3. `POST [/api/v1/admin/pokemon/new](https://adoptpokemon-backend.onrender.com/api/v1/pokemon/new)`: Create a new Pokemon for adoption.
+4. `PUT [/api/v1/pokemon/:id](https://adoptpokemon-backend.onrender.com/api/v1/pokemon/64a70b4d7db1f36b174e4b79)`: Feed a specific Pokemon by ID.
+5. `Decrease Health using node cron`
+6. `GET [/api/v1/pokemon/adopt/:id](https://adoptpokemon-backend.onrender.com/api/v1/pokemon/adopt/64b029874bd1f33fee13281e)` : Adopt a Pokemon by its id.
+7. `GET [/api/v1/pokemon/me/pokemons](https://adoptpokemon-backend.onrender.com/api/v1/me/pokemons)` : Get my Pokemons
+8. `DELETE /api/v1/admin/pokemon/:id`: Delete a Pokemon by ID.
 
 ## User Routes
 
 The following user-related API endpoints are available:
 
-1. `POST /api/users/register`: Register a new user.
-2. `POST /api/users/login`: Log in an existing user.
-3. `GET /api/users/profile`: Get the profile of the currently logged-in user.
-4. `PUT /api/users/profile`: Update the profile information of the currently logged-in user.
-5. `POST /api/users/logout`: Log out the currently logged-in user.
+1. `POST [/api/v1/register](https://adoptpokemon-backend.onrender.com/api/v1/register)`: Register a new user.
+2. `POST [/api/v1/login](https://adoptpokemon-backend.onrender.com/api/v1/login)`: Log in an existing user.
+4. `GET [/api/v1/me](https://adoptpokemon-backend.onrender.com/api/v1/me)`: Profile information of the currently logged-in user.
+5. `GET [/api/v1/logout](https://adoptpokemon-backend.onrender.com/api/v1/logout)`: Log out the currently logged-in user.
 
 ## Functionalities
 
