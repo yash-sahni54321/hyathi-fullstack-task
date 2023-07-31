@@ -35,7 +35,9 @@ export const getPokemon = () => async (dispatch) => {
 
     const { data } = await axios.get(
       "https://adoptpokemon-backend.onrender.com/api/v1/pokemons",
-      { withCredentials: true }
+      {
+        withCredentials: true,
+      }
     );
 
     dispatch({
@@ -106,7 +108,9 @@ export const getPokemonDetails = (id) => async (dispatch) => {
 
     const { data } = await axios.get(
       `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/${id}`,
-      { withCredentials: true }
+      {
+        withCredentials: true,
+      }
     );
 
     dispatch({
@@ -153,7 +157,9 @@ export const myAllPokemons = () => async (dispatch) => {
 
     const { data } = await axios.get(
       "https://adoptpokemon-backend.onrender.com/api/v1/me/pokemons",
-      { withCredentials: true }
+      {
+        withCredentials: true,
+      }
     );
     dispatch({ type: MY_POKEMON_SUCCESS, payload: data });
   } catch (error) {

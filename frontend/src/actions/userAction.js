@@ -16,6 +16,7 @@ import axios from "axios";
 
 // Login
 export const login = (email, password) => async (dispatch) => {
+  console.log("kjghjv");
   try {
     dispatch({ type: LOGIN_REQUEST });
 
@@ -29,7 +30,10 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
-
+    console.log("kjghjv");
+    console.log("BEFORE=>(RESPONSE)", data.token.toString());
+    const result = await localStorage.setItem("token", data.token.toString());
+    console.log("BEFORE=>(LOCAL RESPONSE)", result);
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
@@ -62,11 +66,17 @@ export const register = (userData) => async (dispatch) => {
 
 // Load User
 export const loadUser = () => async (dispatch) => {
+  const token = await localStorage.getItem("token");
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
     const { data } = await axios.get(
       `https://adoptpokemon-backend.onrender.com/api/v1/me`,
+      config,
       { withCredentials: true }
     );
 
