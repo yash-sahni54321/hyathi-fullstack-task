@@ -6,18 +6,15 @@ const cors = require("cors");
 const pokemon = require("./routes/pokemonRoute");
 const user = require("./routes/userRoute");
 const { decreaseHealthPokemon } = require("./controllers/pokemonController");
+const morgan = require("morgan");
 const app = express();
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(cookieParser());
 
 //Routes Import
-
+app.use(morgan("dev"));
 app.use("/api/v1", pokemon);
 app.use("/api/v1", user);
 decreaseHealthPokemon();
