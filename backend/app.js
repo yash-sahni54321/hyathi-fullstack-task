@@ -9,8 +9,7 @@ const { decreaseHealthPokemon } = require("./controllers/pokemonController");
 const app = express();
 app.use(
   cors({
-    origin: ["https://hyathi-fullstack-yashtask.vercel.app/"],
-    credentials: true, // Allow sending cookies in the request
+    origin: "*",
   })
 );
 app.use(express.json());
