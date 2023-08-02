@@ -8,7 +8,13 @@ const user = require("./routes/userRoute");
 const { decreaseHealthPokemon } = require("./controllers/pokemonController");
 const morgan = require("morgan");
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://hyathi-fullstack-yashtask.vercel.app", "*"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 // app.use(cookieParser());
