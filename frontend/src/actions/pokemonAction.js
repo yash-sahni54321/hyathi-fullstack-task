@@ -48,7 +48,7 @@ export const getPokemon = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ALL_POKEMON_FAIL,
-      payload: error.response.data.message,
+      payload: error.message ? error.message : "error",
     });
   }
 };
@@ -86,7 +86,7 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: NEW_POKEMON_FAIL,
-      payload: error.response.data.message,
+      payload: error.message ? error.message : "error",
     });
   }
 };
@@ -123,7 +123,7 @@ export const deletePokemon = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_POKEMON_FAIL,
-      payload: error.response.data.message,
+      payload: error.message ? error.message : "error",
     });
   }
 };
@@ -144,7 +144,7 @@ export const getPokemonDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: POKEMON_DETAILS_FAIL,
-      payload: error.response.data.message,
+      payload: error.message ? error.message : "error",
     });
   }
 };
@@ -181,7 +181,7 @@ export const feedPokemon = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: POKEMON_FEED_FAIL,
-      payload: error.response.data.message,
+      payload: error.message ? error.message : "error",
     });
   }
 };
@@ -211,7 +211,7 @@ export const myAllPokemons = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: MY_POKEMON_FAIL,
-      payload: error.response.data.message,
+      payload: error.message ? error.message : "error",
     });
   }
 };
@@ -249,7 +249,7 @@ export const adoptPokemon = (id, pokemon) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ADOPT_POKEMON_FAIL,
-      payload: error.response.data.message,
+      payload: error.message ? error.message : "error",
     });
   }
 };
@@ -290,7 +290,7 @@ export const removePokemon = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: REMOVE_POKEMON_FAIL,
-      payload: error.response.data.message,
+      payload: error.message ? error.message : "error",
     });
   }
 };
