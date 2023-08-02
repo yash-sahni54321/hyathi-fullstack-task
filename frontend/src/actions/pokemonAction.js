@@ -27,18 +27,19 @@ import {
   REMOVE_POKEMON_REQUEST,
   REMOVE_POKEMON_SUCCESS,
 } from "../constants/pokemonConstants";
+const server = "https://adoptpokemon-backend.onrender.com";
+const getUserToken = () => {
+  return localStorage.getItem("token");
+};
 
 // Get All Pokemons
 export const getPokemon = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_POKEMON_REQUEST });
 
-    const { data } = await axios.get(
-      "https://adoptpokemon-backend.onrender.com/api/v1/pokemons",
-      {
-        withCredentials: true,
-      }
-    );
+    const { data } = await axios.get(`${server}/api/v1/pokemons`, {
+      withCredentials: true,
+    });
 
     dispatch({
       type: ALL_POKEMON_SUCCESS,
@@ -56,16 +57,26 @@ export const getPokemon = () => async (dispatch) => {
 export const createPokemon = (pokemonData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_POKEMON_REQUEST });
+    // Get the token from localStorage
+    const token = getUserToken();
 
-    const config = {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
+    if (!token) {
+      // Handle the case where the user is not authenticated
+      throw new Error("Please log in to access this resource.");
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`, // Include the token in the headers
     };
 
+    // Check the config object to verify the headers
+
     const { data } = await axios.post(
-      `https://adoptpokemon-backend.onrender.com/api/v1/admin/pokemon/new`,
+      `${server}/api/v1/admin/pokemon/new`,
       pokemonData,
-      config
+      {
+        headers: headers,
+      }
     );
 
     dispatch({
@@ -84,9 +95,25 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
 export const deletePokemon = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_POKEMON_REQUEST });
+    // Get the token from localStorage
+    const token = getUserToken();
+
+    if (!token) {
+      // Handle the case where the user is not authenticated
+      throw new Error("Please log in to access this resource.");
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`, // Include the token in the headers
+    };
+
+    // Check the config object to verify the headers
 
     const { data } = await axios.delete(
-      `https://adoptpokemon-backend.onrender.com/api/v1/admin/pokemon/${id}`
+      `${server}/api/v1/admin/pokemon/${id}`,
+      {
+        headers: headers,
+      }
     );
 
     dispatch({
@@ -106,12 +133,9 @@ export const getPokemonDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: POKEMON_DETAILS_REQUEST });
 
-    const { data } = await axios.get(
-      `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    const { data } = await axios.get(`${server}/api/v1/pokemon/${id}`, {
+      withCredentials: true,
+    });
 
     dispatch({
       type: POKEMON_DETAILS_SUCCESS,
@@ -129,16 +153,27 @@ export const getPokemonDetails = (id) => async (dispatch) => {
 export const feedPokemon = (id) => async (dispatch) => {
   try {
     dispatch({ type: POKEMON_FEED_REQUEST });
+    // Get the token from localStorage
+    const token = getUserToken();
 
+    if (!token) {
+      // Handle the case where the user is not authenticated
+      throw new Error("Please log in to access this resource.");
+    }
     const config = {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json", // Include the token in the headers
+    };
 
-    const { data } = await axios.put(
-      `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/${id}`,
-      config
-    );
+    // Check the config object to verify the headers
+    console.log(headers);
+    const { data } = await axios.put(`${server}/api/v1/pokemon/${id}`, config, {
+      headers: headers,
+    });
     dispatch({
       type: POKEMON_DETAILS_SUCCESS,
       payload: data.pokemon,
@@ -154,13 +189,24 @@ export const feedPokemon = (id) => async (dispatch) => {
 export const myAllPokemons = () => async (dispatch) => {
   try {
     dispatch({ type: MY_POKEMON_REQUEST });
+    // Get the token from localStorage
+    const token = getUserToken();
 
-    const { data } = await axios.get(
-      "https://adoptpokemon-backend.onrender.com/api/v1/me/pokemons",
-      {
-        withCredentials: true,
-      }
-    );
+    if (!token) {
+      // Handle the case where the user is not authenticated
+      throw new Error("Please log in to access this resource.");
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`, // Include the token in the headers
+    };
+
+    // Check the config object to verify the headers
+    console.log(headers);
+    const { data } = await axios.get(`${server}/api/v1/me/pokemons`, {
+      headers: headers,
+    });
+    console.log("AllPok");
     dispatch({ type: MY_POKEMON_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -174,18 +220,28 @@ export const myAllPokemons = () => async (dispatch) => {
 export const adoptPokemon = (id, pokemon) => async (dispatch) => {
   try {
     dispatch({ type: ADOPT_POKEMON_REQUEST });
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
+
+    // Get the token from localStorage
+    const token = getUserToken();
+
+    if (!token) {
+      // Handle the case where the user is not authenticated
+      throw new Error("Please log in to access this resource.");
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`, // Include the token in the headers
     };
+
+    // Check the config object to verify the headers
+
     const { data } = await axios.get(
-      `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/adopt/${id}`,
-      pokemon,
-      config
+      `${server}/api/v1/pokemon/adopt/${id}`,
+
+      { headers: headers }
     );
 
+    console.log("hey after adopt");
     dispatch({
       type: ADOPT_POKEMON_SUCCESS,
       payload: data.pokemon,
@@ -202,16 +258,29 @@ export const adoptPokemon = (id, pokemon) => async (dispatch) => {
 export const removePokemon = (id) => async (dispatch) => {
   try {
     dispatch({ type: REMOVE_POKEMON_REQUEST });
+
+    // Get the token from localStorage
+    const token = getUserToken();
+
+    if (!token) {
+      // Handle the case where the user is not authenticated
+      throw new Error("Please log in to access this resource.");
+    }
     const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
-    const { data } = await axios.post(
-      `https://adoptpokemon-backend.onrender.com/api/v1/pokemon/remove/${id}`,
+    const headers = {
+      Authorization: `Bearer ${token}`, // Include the token in the headers
+    };
 
-      config
+    // Check the config object to verify the headers
+    const { data } = await axios.post(
+      `${server}/api/v1/pokemon/remove/${id}`,
+      config,
+      {
+        headers: headers,
+      }
     );
 
     dispatch({

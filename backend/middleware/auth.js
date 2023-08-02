@@ -4,18 +4,25 @@ const User = require("../models/UserModel");
 const ErrorHandler = require("../utils/ErrorHandler");
 
 exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
-  const { token } = req.header("authorization");
-  console.log("Token=>", token);
+  const authorizationHeader = req.headers.authorization;
+
+  const token = authorizationHeader.split(" ")[1];
 
   if (!token) {
-    return next(new ErrorHandler("Please Login to access this resource", 401));
+    return res.status(401).json({
+      success: false,
+      message: "Please log in to access this resource.",
+    });
   }
 
-  const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+  try {
+    const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decodedData.id); // Assuming the decodedData contains user details
 
-  req.user = await User.findById(decodedData.id);
-
-  next();
+    next();
+  } catch (error) {
+    return res.status(401).json({ success: false, message: "Invalid token." });
+  }
 });
 
 exports.authorizeRoles = (...roles) => {

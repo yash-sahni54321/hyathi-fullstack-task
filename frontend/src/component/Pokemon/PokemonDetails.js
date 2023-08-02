@@ -24,6 +24,8 @@ const PokemonDetails = () => {
   );
   const { success } = useSelector((state) => state.removePokemon);
 
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+
   const feedHandler = () => {
     dispatch(feedPokemon(params.id));
   };
@@ -33,7 +35,13 @@ const PokemonDetails = () => {
     alert.success("Pokemon removed Successfully");
   };
   const adoptHandler = () => {
-    dispatch(adoptPokemon(params.id, pokemon));
+    if (isAuthenticated) {
+      dispatch(adoptPokemon(params.id, pokemon));
+      alert.success("Pokemon Adopted Successfully");
+    } else {
+      alert.error("Login to Adopt Pokemon");
+      navigate("/login");
+    }
   };
 
   useEffect(() => {

@@ -13,10 +13,17 @@ import {
   CLEAR_ERRORS,
 } from "../constants/userConstants";
 import axios from "axios";
+const server = "https://adoptpokemon-backend.onrender.com";
+// Function to store the token in Local Storage
+const storeTokenInLocalStorage = (token) => {
+  localStorage.setItem("token", token);
+};
+const getUserToken = () => {
+  return localStorage.getItem("token");
+};
 
 // Login
 export const login = (email, password) => async (dispatch) => {
-  console.log("kjghjv");
   try {
     dispatch({ type: LOGIN_REQUEST });
 
@@ -26,21 +33,20 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `https://adoptpokemon-backend.onrender.com/api/v1/login`,
+      `${server}/api/v1/login`,
       { email, password },
       config
     );
-    console.log("kjghjv");
-    console.log("BEFORE=>(RESPONSE)", data.token.toString());
-    const result = await localStorage.setItem("token", data.token.toString());
-    console.log("BEFORE=>(LOCAL RESPONSE)", result);
+
+    // Store the token in Local Storage
+    storeTokenInLocalStorage(data.token);
+
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
   }
 };
 
-// Register
 export const register = (userData) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
@@ -50,10 +56,13 @@ export const register = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `https://adoptpokemon-backend.onrender.com/api/v1/register`,
+      `${server}/api/v1/register`,
       userData,
       config
     );
+
+    // Store the token in Local Storage
+    storeTokenInLocalStorage(data.token);
 
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
   } catch (error) {
@@ -66,19 +75,25 @@ export const register = (userData) => async (dispatch) => {
 
 // Load User
 export const loadUser = () => async (dispatch) => {
-  const token = await localStorage.getItem("token");
   try {
     dispatch({ type: LOAD_USER_REQUEST });
+    // Get the token from localStorage
+    const token = getUserToken();
 
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
+    if (!token) {
+      // Handle the case where the user is not authenticated
+      throw new Error("Please log in to access this resource.");
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`, // Include the token in the headers
     };
 
-    const { data } = await axios.get(
-      `https://adoptpokemon-backend.onrender.com/api/v1/me`,
-      config,
-      { withCredentials: true }
-    );
+    // Check the config object to verify the headers
+
+    const { data } = await axios.get(`${server}/api/v1/me`, {
+      headers: headers,
+    });
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
@@ -89,7 +104,8 @@ export const loadUser = () => async (dispatch) => {
 // Logout User
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get(`https://adoptpokemon-backend.onrender.com/api/v1/logout`);
+    localStorage.removeItem("token");
+    await axios.get(`${server}/api/v1/logout`);
 
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {

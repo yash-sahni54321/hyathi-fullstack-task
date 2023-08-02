@@ -47,7 +47,7 @@ const Register = () => {
           className="max-w-[400px] w-full mx-auto bg-white p-4"
           onSubmit={submitHandler}
         >
-          <h2 className="text-4xl font-bold text-center py-6">User Login</h2>
+          <h2 className="text-4xl font-bold text-center py-6">Register </h2>
           <div className="flex flex-col py-2">
             <label>Name</label>
             <input
@@ -79,7 +79,7 @@ const Register = () => {
             className="border w-full my-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white"
             on
           >
-            Sign In
+            Sign up
           </button>
         </form>
       </div>

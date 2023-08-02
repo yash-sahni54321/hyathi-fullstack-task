@@ -33,7 +33,7 @@ const Profile = () => {
     if (isAuthenticated) {
       dispatch(myAllPokemons());
     }
-  }, [dispatch, isAuthenticated]);
+  }, [dispatch, isAuthenticated, error, alert]);
 
   return (
     <Fragment>

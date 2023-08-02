@@ -37,6 +37,7 @@ const Dashboard = () => {
   };
   useEffect(() => {
     dispatch(getPokemon());
+    dispatch(myAllPokemons());
   }, []);
 
   useEffect(() => {
@@ -44,9 +45,9 @@ const Dashboard = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
-    if (isAuthenticated) {
-      dispatch(myAllPokemons());
-    }
+    // if (isAuthenticated) {
+    //   dispatch(myAllPokemons());
+    // }
     if (!isAuthenticated) {
       navigate("/login");
     }
